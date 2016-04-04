@@ -1,0 +1,133 @@
+# ref: https://github.com/torchbox/wagtail/blob/master/etc/nginx.conf.sample
+
+# the upstream component nginx needs to connect to
+upstream uwsgiclusters {
+<% if node["load-balancer-setup"]["app_servers"] %>
+    <% node["load-balancer-setup"]["app_servers"].each do |server| %>
+    server <%= server %>;
+    <% end %>
+<% end %>
+}
+
+server {
+    # We don't set 'root' here, because we send location / to uWSGI, so
+    # nothing ends up at nginx's default handler.
+
+    listen <%= node["load-balancer-setup"]["port"] %>;
+    server_name <%= node["load-balancer-setup"]["site_domain"] %>;
+
+    satisfy any;
+
+    # ip from agilityio developer
+    allow 27.72.0.46;
+
+    allow 66.220.144.0/20;
+    allow 66.220.144.0/21;
+    allow 66.220.152.0/21;
+    allow 66.220.159.0/24;
+    allow 69.63.176.0/20;
+    allow 69.63.176.0/21;
+    allow 69.63.176.0/24;
+    allow 69.63.178.0/24;
+    allow 69.63.184.0/21;
+    allow 69.171.224.0/19;
+    allow 69.171.224.0/20;
+    allow 69.171.239.0/24;
+    allow 69.171.240.0/20;
+    allow 69.171.255.0/24;
+    allow 74.119.76.0/22;
+    allow 103.4.96.0/22;
+    allow 173.252.64.0/18;
+    allow 173.252.64.0/19;
+    allow 173.252.70.0/24;
+    allow 173.252.96.0/19;
+    allow 204.15.20.0/22;
+    allow 31.13.24.0/21;
+    allow 31.13.64.0/18;
+    allow 31.13.64.0/19;
+    allow 31.13.64.0/24;
+    allow 31.13.65.0/24;
+    allow 31.13.66.0/24;
+    allow 31.13.67.0/24;
+    allow 31.13.68.0/24;
+    allow 31.13.69.0/24;
+    allow 31.13.70.0/24;
+    allow 31.13.71.0/24;
+    allow 31.13.72.0/24;
+    allow 31.13.73.0/24;
+    allow 31.13.74.0/24;
+    allow 31.13.75.0/24;
+    allow 31.13.76.0/24;
+    allow 31.13.77.0/24;
+    allow 31.13.78.0/24;
+    allow 31.13.79.0/24;
+    allow 31.13.80.0/24;
+    allow 31.13.81.0/24;
+    allow 31.13.82.0/24;
+    allow 31.13.83.0/24;
+    allow 31.13.84.0/24;
+    allow 31.13.85.0/24;
+    allow 31.13.86.0/24;
+    allow 31.13.87.0/24;
+    allow 31.13.88.0/24;
+    allow 31.13.89.0/24;
+    allow 31.13.90.0/24;
+    allow 31.13.91.0/24;
+    allow 31.13.92.0/24;
+    allow 31.13.93.0/24;
+    allow 31.13.94.0/24;
+    allow 31.13.95.0/24;
+    allow 31.13.96.0/19;
+
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/.htpasswd;
+
+    error_log /var/log/nginx/<%= node["load-balancer-setup"]["site_domain"] %>_error.log;
+    access_log /var/log/nginx/<%= node["load-balancer-setup"]["site_domain"] %>_access.log;
+
+    # Maximum file upload size.
+    client_max_body_size 64M;
+
+    # Enable content compression for text types.
+    gzip on;
+    gzip_types text/plain text/css application/x-javascript image/svg+xml;
+    gzip_comp_level 1;
+    gzip_disable msie6;
+    gzip_http_version 1.0;
+    gzip_proxied any;
+    gzip_vary on;
+
+    location /static/ {
+        access_log off;
+        expires 3600;
+        alias <%= node["deploy-setup"]["app_path"] %>/static/;
+    }
+
+    # Set a longer expiry for CACHE/, because the filenames are unique.
+    location /static/CACHE/ {
+        access_log off;
+        expires 864000;
+        alias <%= node["deploy-setup"]["app_path"] %>/static/CACHE/;
+    }
+
+    # Only server /media/images by default, not e.g. original_images/.
+    location /media/images {
+        expires 864000;
+        alias <%= node["deploy-setup"]["app_path"] %>/media/images;
+    }
+
+    # Finally, send all non-media requests to the Django server.
+    location / {
+        uwsgi_pass  uwsgiclusters;
+        uwsgi_read_timeout 1800;
+
+        include     /etc/nginx/uwsgi_params;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Queue-Start "t=${msec}000";
+        proxy_redirect off;
+        # proxy_pass http://backend;
+    }
+}

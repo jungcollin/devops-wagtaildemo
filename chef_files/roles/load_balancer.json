@@ -1,0 +1,19 @@
+{
+    "json_class": "Chef::Role",
+    "run_list": [
+        "recipe[nginx]",
+        "recipe[goaccess]",
+        "recipe[load-balancer-setup]"
+    ],
+    "default_attributes": {
+        "nginx": {
+            // Prevent creating the default sites enabled at
+            // /etc/nginx/sites-enabled/default
+            "default_site_enabled": false
+        },
+        "goaccess": {
+            "version": "0.9.4",
+            "checksum": "8a6e167f6a9330ccf37c652e577792c9c626d7134d64f841eb54fefcdff6c5ce"
+        }
+    }
+}

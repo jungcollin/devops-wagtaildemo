@@ -1,0 +1,14 @@
+{
+    "json_class": "Chef::Role",
+    "run_list": [
+        "recipe[apt]",
+        "recipe[ntp]",
+        "recipe[firewall]",
+        "recipe[ufw]"
+    ],
+    "default_attributes": {
+        "firewall": {
+            "allow_ssh": true
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "data_bag_id": "local",
+    "environment": "development",
+    "run_list": [
+        "role[base]",
+        "role[database]",
+        "role[webapp]"
+    ]
+}

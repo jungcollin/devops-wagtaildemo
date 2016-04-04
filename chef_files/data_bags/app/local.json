@@ -1,0 +1,32 @@
+{
+    "id": "local",
+    "project_name": "sdvdev",
+    "site_domain": "sdvdev.com",
+    "deploy-setup": {
+        "user" : {
+            "name" : "vagrant",
+            "password" : "$1$WvV3xEHl$vvqguMo2iI1s58MtG1D7f/",
+            "group": "vagrant",
+            "allowed_ssh_keys" : []
+        },
+        "deploy_dir": "wagtaildemo",
+        "app_dir": "."
+    },
+    "load-balancer-setup": {
+        "app_servers": [
+            "10.0.0.22:20159"
+        ]
+    },
+    "django-setup": {
+        "venv_dir": ".env"
+    },
+    "postgresql": {
+        "password": "postgresql",
+        "user": {
+            "name": "sdvdev",
+            "password": "sdvdev",
+            "database": "local_sdvdev"
+        },
+        "allowed_app_servers": ["10.0.0.1/24"]
+    }
+}

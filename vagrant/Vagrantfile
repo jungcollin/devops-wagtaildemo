@@ -1,0 +1,39 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # You need to use Vagrant 1.5+
+  # This box will be downloaded from vagrant cloud.
+  config.vm.box = "boxesio/trusty64-chef"
+
+  # for faster download the box, direct it to a local link
+  # config.vm.box_url = "http://path/to/box/on/local/network"
+
+  # Disabling the default /vagrant share
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  config.ssh.forward_agent = true
+
+  # For running all services in a local node
+  config.vm.define "local", autostart: false do |node|
+    node.vm.network :private_network, ip: "22.22.22.22"
+    node.vm.hostname = "local"
+    node.vm.synced_folder "../../", "/home/vagrant/wagtaildemo"
+
+    node.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "2048"]
+    end
+  end
+
+  # If a 'Vagrantfile.local' file exists, import any configuration settings
+  # defined there into here. Vagrantfile.local is ignored in version control,
+  # so this can be used to add configuration specific to this computer.
+  if File.exist? "Vagrantfile.local"
+    instance_eval File.read("Vagrantfile.local"), "Vagrantfile.local"
+  end
+
+end

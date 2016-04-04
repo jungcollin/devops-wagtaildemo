@@ -1,0 +1,23 @@
+# global
+########
+node_modules/
+bin/droplets.config.js
+
+# Chef files
+#############
+chef_files/.chef/encrypted_data_bag_secret
+chef_files/cookbooks
+chef_files/nodes/*.json
+
+# DO NOT sync the unencrypted data bag files
+chef_files/data_bags/local/*.json
+!chef_files/data_bags/local/*.example.json
+
+# DO NOT sync the generated data bag files in app folder
+chef_files/data_bags/app/*-generated.json
+
+# vagrant
+#########
+.vagrant
+vagrant/Vagrantfile.local
+vagrant/cirunner/gitlab-https-ca.crt

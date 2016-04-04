@@ -1,0 +1,55 @@
+{
+    "id": "load-testing-generated",
+    "project_name": "sdvdev",
+    "site_domain": "sdvdev.com",
+    "deploy-setup": {
+        "user": {
+            "name": "deploy",
+            "password": "$1$xyz$GBpeRiLGMEX8wm3l08Oc3/",
+            "group": "deploy",
+            "allowed_ssh_keys": []
+        },
+        "deploy_dir": "sdvdev",
+        "app_dir": ".",
+        "git_repo": {
+            "repository": "git@github.com:sangdongvan/devops-wagtaildemo.git",
+            "revision": "develop",
+            "deploy_key": "----- RSA PRIVATE KEY -----"
+        }
+    },
+    "frontend_server": "frontend-cache-ip",
+    "app_servers": ["webapp-ip"],
+    "varnish-setup": {
+        "host": "frontend-cache-ip",
+        "port": 80,
+        "version": "4.1",
+        "malloc": "1024mb"
+    },
+    "load-balancer-setup": {
+        "host": "load-balancer-ip",
+        "port": 8081,
+        "app_servers": [
+            "webapp1-ip:webapp1-port",
+            "webapp2-ip:webapp2-port"
+        ]
+    },
+    "postgresql": {
+        "host": "postgresql-ip",
+        "port": "5432",
+        "user": {
+            "name": "sdvdev",
+            "password": "sdvdev@22",
+            "database": "staging_sdvdev"
+        }
+    },
+    "redis": {
+        "host": "redis-ip",
+        "port": "6379",
+        "prefix": "sdvdev"
+    },
+    "s3": {
+        "SDVDEV_AWS_ACCESS_KEY_ID": "SDVDEV_AWS_ACCESS_KEY_ID",
+        "SDVDEV_AWS_SECRET_ACCESS_KEY": "SDVDEV_AWS_SECRET_ACCESS_KEY",
+        "SDVDEV_AWS_STORAGE_BUCKET_NAME": "SDVDEV_AWS_SECRET_ACCESS_KEY"
+    }
+}

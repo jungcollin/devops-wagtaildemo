@@ -1,0 +1,12 @@
+{
+    "data_bag_id": "stag-like",
+    "environment": "staging",
+    "run_list": [
+        "role[base]",
+        "role[database]",
+        "recipe[redisio]",
+        "recipe[redisio::enable]",
+        "role[load_balancer]",
+        "role[webapp]"
+    ]
+}

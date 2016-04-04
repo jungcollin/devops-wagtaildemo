@@ -1,0 +1,7 @@
+# TYPE  DATABASE    USER        CIDR-ADDRESS          METHOD
+local   all         all                               ident
+local   all         all                               md5
+host    all         all         127.0.0.1/32          md5
+
+# open to the world, already restricted by the iptable firewall
+host    all         all         0.0.0.0/0            md5

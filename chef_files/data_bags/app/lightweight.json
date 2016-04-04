@@ -1,0 +1,15 @@
+{
+    "id": "lightweight-sdvdev",
+    "project_name": "sdvdev",
+    "site_domain": "sdvdev.com",
+    "deploy-setup": {
+        "user" : {
+            "name" : "vagrant",
+            "password" : "$1$WvV3xEHl$vvqguMo2iI1s58MtG1D7f/",
+            "group": "vagrant",
+            "allowed_ssh_keys" : []
+        },
+        "deploy_dir": "wagtaildemo",
+        "app_dir": "."
+    }
+}

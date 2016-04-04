@@ -1,0 +1,106 @@
+# -----------------------------
+# PostgreSQL configuration file
+# -----------------------------
+#
+# This file consists of lines of the form:
+#
+#   name = value
+#
+# (The "=" is optional.)  Whitespace may be used.  Comments are introduced with
+# "#" anywhere on a line.  The complete list of parameter names and allowed
+# values can be found in the PostgreSQL documentation.
+#
+# The commented-out settings shown in this file represent the default values.
+# Re-commenting a setting is NOT sufficient to revert it to the default value;
+# you need to reload the server.
+#
+# This file is read on server startup and when the server receives a SIGHUP
+# signal.  If you edit the file on a running system, you have to SIGHUP the
+# server for the changes to take effect, or use "pg_ctl reload".  Some
+# parameters, which are marked below, require a server shutdown and restart to
+# take effect.
+#
+# Any parameter can also be given as a command-line option to the server, e.g.,
+# "postgres -c log_connections=on".  Some parameters can be changed at run time
+# with the "SET" SQL command.
+#
+# Memory units:  kB = kilobytes        Time units:  ms  = milliseconds
+#                MB = megabytes                     s   = seconds
+#                GB = gigabytes                     min = minutes
+#                                                   h   = hours
+#                                                   d   = days
+
+
+#------------------------------------------------------------------------------
+# FILE LOCATIONS
+#------------------------------------------------------------------------------
+
+# The default values of these variables are driven from the -D command-line
+# option or PGDATA environment variable, represented here as ConfigDir.
+
+data_directory = '/var/lib/postgresql/<%= node['postgresql']['version'] %>/main'
+hba_file = '/etc/postgresql/<%= node['postgresql']['version'] %>/main/pg_hba.conf'
+ident_file = '/etc/postgresql/<%= node['postgresql']['version'] %>/main/pg_ident.conf'
+external_pid_file = '/var/run/postgresql/<%= node['postgresql']['version'] %>-main.pid'
+
+
+#------------------------------------------------------------------------------
+# CONNECTIONS AND AUTHENTICATION
+#------------------------------------------------------------------------------
+
+# - Connection Settings -
+
+# what IP address(es) to listen on;
+# bypass here, but prevent at the firewall
+listen_addresses = '*'
+                    # comma-separated list of addresses;
+                    # defaults to 'localhost'; use '*' for all
+                    # (change requires restart)
+port = 5432             # (change requires restart)
+max_connections = 100           # (change requires restart)
+# Note:  Increasing max_connections costs ~400 bytes of shared memory per
+# connection slot, plus lock space (see max_locks_per_transaction).
+#superuser_reserved_connections = 3 # (change requires restart)
+unix_socket_directories = '/var/run/postgresql'       # (change requires restart)
+#unix_socket_group = ''         # (change requires restart)
+#unix_socket_permissions = 0777     # begin with 0 to use octal notation
+                    # (change requires restart)
+#bonjour = off              # advertise server via Bonjour
+                    # (change requires restart)
+#bonjour_name = ''          # defaults to the computer name
+                    # (change requires restart)
+
+# - Security and Authentication -
+
+#authentication_timeout = 1min      # 1s-600s
+ssl = true              # (change requires restart)
+#ssl_ciphers = 'ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH'  # allowed SSL ciphers
+                    # (change requires restart)
+#ssl_renegotiation_limit = 512MB    # amount of data between renegotiations
+ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem'      # (change requires restart)
+ssl_key_file = '/etc/ssl/private/ssl-cert-snakeoil.key'     # (change requires restart)
+#ssl_ca_file = ''           # (change requires restart)
+#ssl_crl_file = ''          # (change requires restart)
+#password_encryption = on
+#db_user_namespace = off
+
+# Kerberos and GSSAPI
+#krb_server_keyfile = ''
+#krb_srvname = 'postgres'       # (Kerberos only)
+#krb_caseins_users = off
+
+# - TCP Keepalives -
+# see "man 7 tcp" for details
+
+#tcp_keepalives_idle = 0        # TCP_KEEPIDLE, in seconds;
+                    # 0 selects the system default
+#tcp_keepalives_interval = 0        # TCP_KEEPINTVL, in seconds;
+                    # 0 selects the system default
+#tcp_keepalives_count = 0       # TCP_KEEPCNT;
+                    # 0 selects the system default
+
+#------------------------------------------------------------------------------
+# CUSTOMIZED OPTIONS
+#------------------------------------------------------------------------------
+
+# Add settings for extensions here

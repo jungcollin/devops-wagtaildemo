@@ -1,0 +1,72 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+#####################################################
+## For testing remote configuration on local       ##
+#####################################################
+
+config.vm.define "staging-standalone", autostart: false do |node|
+  node.vm.network :private_network, ip: "44.44.44.44"
+  node.vm.hostname = "staging-standalone"
+
+  node.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+  end
+end
+
+#####################################################
+## For Gitlab CI runner                            ##
+#####################################################
+
+(1..2).each do |i|
+  config.vm.define "cirunner-#{i}" do |node|
+    node.vm.box = "ubuntu/trusty64"
+
+    node.vm.synced_folder "./cirunner", "/vagrant", id: "vagrant-root", owner: "vagrant", group: "vagrant"
+    node.vm.provision :shell, path: "./cirunner/bootstrap.sh", :privileged => false
+
+    node.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
+  end
+end
+
+# For running the proxy service
+config.vm.define "webserver", autostart: false do |node|
+  node.vm.network :private_network, ip: "10.0.0.21"
+  node.vm.hostname = "webserver"
+
+  node.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+end
+
+config.vm.define "webapp", autostart: false do |node|
+  node.vm.network :private_network, ip: "10.0.0.22"
+  node.vm.hostname = "webapp"
+  node.vm.synced_folder "../wagtaildemo", "/home/vagrant/wagtaildemo"
+
+  node.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+end
+
+# For database configuration
+config.vm.define "database", autostart: false do |node|
+  node.vm.network :private_network, ip: "10.0.0.23"
+  node.vm.hostname = "database"
+
+  node.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+end
+
+# For elasticsearch configuration
+config.vm.define "elasticsearch", autostart: false do |node|
+  node.vm.network :private_network, ip: "10.0.0.24"
+  node.vm.hostname = "elasticsearch"
+
+  node.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+end

@@ -1,0 +1,17 @@
+{
+    "json_class": "Chef::Role",
+    "run_list": [
+        "recipe[build-essential]",
+        "recipe[git]",
+        "recipe[deploy-setup]",
+        "recipe[django-setup]",
+        "recipe[build-tools::node_ecosystem]",
+        "recipe[app-setup]"
+    ],
+    "default_attributes": {
+        "build-tools": {
+            "gem_packages": ["sass"],
+            "npm_packages": ["gulp", "bower"]
+        }
+    }
+}

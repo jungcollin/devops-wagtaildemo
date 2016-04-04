@@ -1,0 +1,30 @@
+{
+  "name": "devops-sdvdev",
+  "version": "1.0.0",
+  "description": "Sdvdev Devops works",
+  "main": "index.js",
+  "bin": {
+    "devops-sdvdev": "create-droplets.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.asoft-python.com:sangdongvan/devops-wagtaildemo.git"
+  },
+  "keywords": [
+    "devops"
+  ],
+  "author": "Sang D.",
+  "license": "ISC",
+  "devDependencies": {
+    "do-wrapper": "3.3.3"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "lodash": "^4.5.1",
+    "lodash.merge": "^4.3.2",
+    "underscore": "^1.8.3"
+  }
+}

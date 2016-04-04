@@ -1,0 +1,63 @@
+{
+  "id": "frontend-cache",
+  "project_name": {
+    "encrypted_data": "4I/uhVtZC5M6FxDh6CaPFdac8sa7iYriSYhlMA3Ir4k=\n",
+    "iv": "WANh/20Yu6OSU2hykZE+yw==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "site_domain": {
+    "encrypted_data": "0MsU8EgRPOdI66JxDWDxvBnzksj7Lm18NrWX4t2hrHtMLmZLFbq2xVqF3QQY\n0L/F\n",
+    "iv": "w55OoQSpgMVM/tZgVRqTUA==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "deploy-setup": {
+    "encrypted_data": "NIDo+5vSQIq22OiKby/Yzt8ZdWccYOaUv69WAKDRb6nG144wVJARqi+cLHIG\nkJXwIPGFcoo9tS2OF/YM/Dcy/LYR31rHeKChnMuAAYRacFmB0UPOwVfsA/0P\nishy4XY/YkZgYNO20v/mkpo0Um4PFeVgGRuc/8P/NIpI+ccQF6bHVhbeMatt\nQpoIcep58kZMJPBDQVvK48jqZs+7Ieh009ZL063uh84O+Z+AOvMxUvrNDXx7\nxQir41W3gtXXcbg/k6lLfsQsoFPjH2ZX5Bz1B28UswwOe2qA8RF5MV0z+rni\n9aTx4vH0FK6jBuLyeG9ZzBlfV059WgtM2ZASLpl9aUoY/FwC95lcWFNoMchD\noPjvTA82QVPgXHjxAiAUpCwWDWv4HwJeqFsYq7CFsClsw/8leKYMQiCvPMAD\nD314+r1rpEYjCo+7cqsa+sAb0t92PgGkVd2/H1vz75GNRXIRxb6hfabwGddF\nR93W+1c5mSb8K0bliRz9HDXN/5+O+YrwVgeomKq72kuOQaw9wcsK5EGFf5cu\nJikPosaocONtW+E5vb1tFrzYuWiKz6F/ogWZcb8qzkSSJUjqwa/u3jEghgrd\nxgOfC0tigO3VCG1X/Ua8YPjzM+i8wnKXdYF6E3elP+aYsPmk8P8ym8KFdLex\nnsN6xIOAR6rKJsbmMarp4WwM67HcByrXso1kmRnowAYTAPezIjDgf+SJaZJf\nw/0EXI9l7V/8/VyeE2U+k/vP2vliZ93WcAGOV9LV7X2uGTA2U/CP5UCbaKrL\nqTvtIgfVVQ==\n",
+    "iv": "5aoeRqN6F8yaXLj+6L991A==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "app_servers": {
+    "encrypted_data": "zWUFBkESdSds4kifeXNAvElyT8Aim3dHLSftjSCQE0k=\n",
+    "iv": "eR5LAQ3nzt4w5ITH8RAYQg==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "frontend_server": {
+    "encrypted_data": "ZCcvDwngK+b87vLcwQKQRQATvoSzfO9Zk/25ZeoAR1k=\n",
+    "iv": "+6s8RUf0aL7cIRTavvpgiw==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "varnish-setup": {
+    "encrypted_data": "h0H9P22J1R9dXfXzEgV2vSaRL3Sxopc3SQkj0PM8V13PX8aVdGk9q4QCB5dg\nZnJd1eawmrrTh4HrDN3DSHIVIn8sln+PcukdvQOejzqwqiYogJNS4tt37KEX\n3LRz0bNe\n",
+    "iv": "l4nEHNTK6AxJYEY6ECorMQ==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "load-balancer-setup": {
+    "encrypted_data": "SblH9rOwe2+lcbkX2ORE/JX19l2SsHucs7bSfNq8B/2nXY7MrnOXuFFAlaG8\nNDyqxDHHCpPq5G6QVlxCK2KVyWgnYiPjgcGLinEUlGpFQcM3zzfSy2jPTqae\nVbV2ivEg\n",
+    "iv": "ccivHl6WeRn/bHYjscuntw==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "postgresql": {
+    "encrypted_data": "0kpfmIw840/aDdQOgCs+Lejz9dVzLcVuueWhPdiqOdTZcF4UykkzOjf/M+FM\nAdrvTttveKkjAqpmIxs900P3CE0N2Rwnc0hai+1wgotieS0ikEh2Sxth3G1K\nVLBYJn65lBZ9ZzxKEcAilgkIezpCpAklqvc9By9wLHRiFQTCYmahtH6HghUE\nuI8R4ycWZn6Q3Q7rj1vlymKV3ZNShNndl7o+Op8AjfGX7qaqmSufnRYWSSAL\nFXuPFWA0VNSnKoDBRKocjqLCpFy8tczW1QyP0qAJ5uJLYulYUy6aBNgGTSo=\n",
+    "iv": "wcjmU4sMORIKvA/Efe0eLA==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "redis": {
+    "encrypted_data": "OMlp8RrO+fouHaogv+fQE7bV12QLkadIO2g/8W9XNqVtN2I3mDwzxYGYS0lK\nhYnVFN8uTQVCxseqjbGV59EegJQ3fc9XCjMDwv1fyNTLld0=\n",
+    "iv": "QHhwpOBcht7qC6XF4XhwKg==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "s3": {
+    "encrypted_data": "ZB422dxky1p896xTNFPJt15t/zJMNsmE0FK7bvLKRUTCRVgkjmNu81g9CBkc\nUGKrFEcdkb4nmKH5DAfJMK7DzotC/WkydDbgXPuhChBOCC4mJ4cQcQxolsEe\nQtnjQog+eN445uA74H+KhURHkCETLPOAkwnADhu54k6Wtn3OQc1s4JOF/Mx4\nr/1qPm1qxhMhpXAq+JKh8NaU7ktHFcwwnNMR1u0pDMOgS7B7vhJ6BwIzqDX8\ncpt4+tMzvunUW9zz+7eT2QIyNfVybhAWR6zmx56FpHAq3u1HC2W/7ZZxyZI=\n",
+    "iv": "TqVgqSGx82zEcP8QKAq9iQ==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}

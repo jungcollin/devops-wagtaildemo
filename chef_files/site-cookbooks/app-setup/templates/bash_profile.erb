@@ -1,0 +1,49 @@
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# PROJECT's PATH
+export DEPLOY_PATH=<%= node["deploy-setup"]["deploy_path"] %>
+export APP_PATH=<%= node["deploy-setup"]["app_path"] %>
+
+# ENVIRONMENT VARIABLES
+export DJANGO_SETTINGS_MODULE=sdvdev.settings.<%= node.chef_environment %>
+
+<% if @postgresql %>
+export SDVDEV_DB_NAME=<%= @postgresql["user"]["database"] %>
+export SDVDEV_DB_USER=<%= @postgresql["user"]["name"] %>
+export SDVDEV_DB_PASSWORD=<%= @postgresql["user"]["password"] %>
+export SDVDEV_DB_HOST=<%= @postgresql["host"] %>
+export SDVDEV_DB_PORT=<%= @postgresql["port"] %>
+<% end %>
+
+export SDVDEV_ELASTICSEARCH_URL=http://10.0.0.24:9200
+export SDVDEV_ELASTICSEARCH_INDEX=sdvdev
+
+<% if @redis %>
+export SDVDEV_REDIS_LOCATION=redis://<%= @redis["host"] %>:<%= @redis["port"] %>/1
+export SDVDEV_REDIS_KEY_PREFIX=<%= @redis["prefix"] %>
+<% end %>
+
+<% if @s3 %>
+export SDVDEV_AWS_ACCESS_KEY_ID=<%= @s3['SDVDEV_AWS_ACCESS_KEY_ID'] %>
+export SDVDEV_AWS_SECRET_ACCESS_KEY=<%= @s3['SDVDEV_AWS_SECRET_ACCESS_KEY'] %>
+export SDVDEV_AWS_STORAGE_BUCKET_NAME=<%= @s3['SDVDEV_AWS_STORAGE_BUCKET_NAME'] %>
+<% end %>
+
+# Activate virtualenv
+. <%= node["django-setup"]["venv_path"] %>/bin/activate
+
+# Set working directory if exist
+if [ -d "<%= node["deploy-setup"]["app_path"] %>" ] ; then
+    cd <%= node["deploy-setup"]["app_path"] %>
+fi

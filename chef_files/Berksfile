@@ -1,0 +1,32 @@
+source 'https://api.berkshelf.com'
+
+# base resources
+cookbook 'apt'
+cookbook 'curl'
+cookbook 'ntp'
+cookbook 'build-essential'
+cookbook 'git'
+cookbook 'ufw'
+cookbook 'firewall'
+cookbook 'ruby_build'
+
+# proxy server
+cookbook 'nginx', '~> 2.7.4'
+
+# for monitoring the webserver
+cookbook 'goaccess'
+
+# for django application
+cookbook 'poise-python'
+cookbook 'application'
+cookbook 'application_python'
+
+# for postgresql database
+cookbook 'postgresql'
+
+# for caching file with redis
+cookbook 'redisio'
+
+# for elasticsearch package
+cookbook 'java'
+cookbook 'elasticsearch'

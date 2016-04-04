@@ -1,0 +1,7 @@
+{
+    "data_bag_id": "sdvdev",
+    "run_list": [
+        "role[base]",
+        "role[elasticsearch]"
+    ]
+}

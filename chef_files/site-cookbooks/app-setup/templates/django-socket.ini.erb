@@ -1,0 +1,40 @@
+[uwsgi]
+uid     = <%= node["deploy-setup"]["user"]["name"] %>
+gid     = <%= node["deploy-setup"]["user"]["group"] %>
+socket  = :<%= node["app-setup"]["uwsgi_socket"] %>
+
+env = DJANGO_SETTINGS_MODULE=sdvdev.settings.<%= @environment %>
+
+<% if @postgresql %>
+env = SDVDEV_DB_NAME=<%= @postgresql["user"]["database"] %>
+env = SDVDEV_DB_USER=<%= @postgresql["user"]["name"] %>
+env = SDVDEV_DB_PASSWORD=<%= @postgresql["user"]["password"] %>
+env = SDVDEV_DB_HOST=<%= @postgresql["host"] %>
+env = SDVDEV_DB_PORT=<%= @postgresql["port"] %>
+<% end %>
+
+env = SDVDEV_ELASTICSEARCH_URL=http://10.0.0.24:9200
+env = SDVDEV_ELASTICSEARCH_INDEX=sdvdev
+
+<% if @redis %>
+env = SDVDEV_REDIS_LOCATION=redis://<%= @redis["host"] %>:<%= @redis["port"] %>/1
+env = SDVDEV_REDIS_KEY_PREFIX=<%= @redis["prefix"] %>
+<% end %>
+
+<% if @s3 %>
+env = SDVDEV_AWS_ACCESS_KEY_ID=<%= @s3['SDVDEV_AWS_ACCESS_KEY_ID'] %>
+env = SDVDEV_AWS_SECRET_ACCESS_KEY=<%= @s3['SDVDEV_AWS_SECRET_ACCESS_KEY'] %>
+env = SDVDEV_AWS_STORAGE_BUCKET_NAME=<%= @s3['SDVDEV_AWS_STORAGE_BUCKET_NAME'] %>
+<% end %>
+
+virtualenv  = <%= node["django-setup"]["venv_path"] %>
+module      = <%= @project_name %>.wsgi:application
+chdir       = <%= node["deploy-setup"]["app_path"] %>
+
+master      = 1
+processors  = 1
+workers     = 1
+die-on-term = true
+
+pidfile = /var/run/uwsgi-socket.pid
+logger  = file:/var/log/uwsgi/django-socket.log
