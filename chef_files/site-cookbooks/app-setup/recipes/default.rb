@@ -36,13 +36,19 @@ script_path = "#{node["deploy-setup"]["app_path"]}/bin"
 
 # grant execute persmision before running the script
 bash "add execute permission for all scripts in bin folder #{script_path}" do
-    code "chmod u+x #{script_path}/*.sh"
+    code <<-EOH
+if [ -d #{script_path} ]; then
+    chmod u+x #{script_path}/*
+fi
+EOH
 end
 
 # for running script after deploying
 bash "post deploy" do
     code <<-EOH
-/bin/su - #{deploy_user["name"]} -c "./bin/post_deploy.sh"
+if [ -f #{script_path}/post_deploy.sh ]; then
+    /bin/su - #{deploy_user["name"]} -c "./bin/post_deploy.sh"
+fi
 EOH
     creates "/var/run/postsetupuid.bdb"
     action :run
