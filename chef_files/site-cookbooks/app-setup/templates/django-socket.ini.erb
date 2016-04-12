@@ -3,7 +3,7 @@ uid     = <%= node["deploy-setup"]["user"]["name"] %>
 gid     = <%= node["deploy-setup"]["user"]["group"] %>
 socket  = :<%= node["app-setup"]["uwsgi_socket"] %>
 
-env = DJANGO_SETTINGS_MODULE=sdvdev.settings.<%= @environment %>
+env = DJANGO_SETTINGS_MODULE=wagtaildemo.settings.<%= @environment %>
 
 <% if @postgresql %>
 env = SDVDEV_DB_NAME=<%= @postgresql["user"]["database"] %>

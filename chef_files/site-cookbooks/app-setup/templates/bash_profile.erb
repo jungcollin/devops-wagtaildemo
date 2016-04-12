@@ -16,7 +16,7 @@ export DEPLOY_PATH=<%= node["deploy-setup"]["deploy_path"] %>
 export APP_PATH=<%= node["deploy-setup"]["app_path"] %>
 
 # ENVIRONMENT VARIABLES
-export DJANGO_SETTINGS_MODULE=sdvdev.settings.<%= node.chef_environment %>
+export DJANGO_SETTINGS_MODULE=wagtaildemo.settings.<%= node.chef_environment %>
 
 <% if @postgresql %>
 export SDVDEV_DB_NAME=<%= @postgresql["user"]["database"] %>
