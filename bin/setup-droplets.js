@@ -91,31 +91,31 @@ function prepareDataBagFile(droplets) {
     const dropletsConfig = config.droplets;
 
     const appServersConfig = _.filter(droplets, function(droplet) {
-        return droplet.name.indexOf('load-testing-webapp') !== -1;
+        return droplet.name.indexOf('webapp') !== -1;
     }).map(function(droplet) {
         return `${droplet.networks['v4']['0'].ip_address}:20159`;
     });
 
     const appServers = _.filter(droplets, function(droplet) {
-        return droplet.name.indexOf('load-testing-webapp') !== -1;
+        return droplet.name.indexOf('webapp') !== -1;
     }).map(function(droplet) {
         return droplet.networks['v4']['0'].ip_address;
     });
 
     const postgresqlHost = _.find(droplets, function(droplet) {
-        return droplet.name.indexOf('load-testing-database') !== -1;
+        return droplet.name.indexOf('database') !== -1;
     }).networks['v4']['0'].ip_address;
 
     const redisHost = _.find(droplets, function(droplet) {
-        return droplet.name.indexOf('load-testing-load-balancer') !== -1;
+        return droplet.name.indexOf('load-balancer') !== -1;
     }).networks['v4']['0'].ip_address;
 
     const loadBalancerHost = _.find(droplets, function(droplet) {
-        return droplet.name.indexOf('load-testing-load-balancer') !== -1;
+        return droplet.name.indexOf('load-balancer') !== -1;
     }).networks['v4']['0'].ip_address;
 
     const frontendCacheHost = _.find(droplets, function(droplet) {
-        return droplet.name.indexOf('load-testing-load-balancer') !== -1;
+        return droplet.name.indexOf('load-balancer') !== -1;
     }).networks['v4']['0'].ip_address;
 
     const configWithDroplets = {
