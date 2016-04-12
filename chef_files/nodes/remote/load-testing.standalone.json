@@ -1,0 +1,12 @@
+{
+    "data_bag_id": "load-testing-generated",
+    "environment": "staging",
+    "run_list": [
+        "role[base]",
+        "role[database]",
+        "role[cache]",
+        "role[webapp]",
+        "role[load_balancer]",
+        "role[frontend_cache]"
+    ]
+}
