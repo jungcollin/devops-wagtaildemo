@@ -74,7 +74,7 @@ directory venv_path do
     action      :create
 end
 
-requirement_file_path = "#{node["deploy-setup"]["app_path"]}/requirements/#{node.chef_environment}.txt"
+requirement_file_path = "#{node["deploy-setup"]["app_path"]}/requirements.txt"
 
 # the requirement file will be found via chef_environment
 pip_requirements requirement_file_path do
